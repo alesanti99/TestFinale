@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,10 +18,13 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
     private bool isTouchingGround;
 
+    public TMP_Text scoreText;
+
     // Start is called before the first frame update
     void Start()
     {
         player = GetComponent<Rigidbody2D>();
+        scoreText.text = "Score : " + Scoring.totalScore;
     }
 
     // Update is called once per frame
@@ -59,6 +64,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Score"))
         {
             Scoring.totalScore += 1;
+            scoreText.text = "Score: " + Scoring.totalScore;
              collision.gameObject.SetActive(false);
         }
     }
